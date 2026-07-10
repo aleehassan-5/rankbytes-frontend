@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-blue-deep: #0F3D91;
+  --color-blue-bright: #0B5ED7;
+  --color-blue-sky: #3E8EF7;
+  --color-ink: #0B1E3D;
+  --color-slate: #5A6B8C;
+  --color-line: #E3E9F5;
+  --color-tint: #F4F8FF;
+  --color-glow: #7FC4FF;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: #fff;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+}
+
+.font-mono-label {
+  font-family: var(--font-mono);
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -60; }
+}
+.map-arc {
+  animation: dash-flow 6s linear infinite;
+}
+
+@keyframes pulse-ring {
+  0% { r: 3; opacity: 0.9; }
+  100% { r: 16; opacity: 0; }
+}
+.map-pulse {
+  transform-origin: center;
+  animation: pulse-ring 3s ease-out infinite;
+}
+
+@keyframes pulse-fab {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(11,94,215,0.35), 0 20px 48px rgba(11,30,61,0.18); }
+  50% { box-shadow: 0 0 0 10px rgba(11,94,215,0), 0 20px 48px rgba(11,30,61,0.18); }
+}
+.animate-pulse-fab {
+  animation: pulse-fab 2.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
