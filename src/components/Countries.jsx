@@ -15,7 +15,7 @@ export default function Countries() {
 
   const filtered = activeTab === 'All'
     ? countries
-    : countries.filter(([, , continent]) => continent === activeTab);
+    : countries.filter(([,, continent]) => continent === activeTab);
 
   const visible = showAll ? filtered : filtered.slice(0, 48);
 
@@ -50,16 +50,24 @@ export default function Countries() {
           ))}
         </div>
 
-        {/* Country Pills */}
+        {/* Country Pills with real flag images */}
         <div className="flex flex-wrap gap-2.5">
-          {visible.map(([flag, name]) => (
+          {visible.map(([code, name]) => (
             <button
-              key={name}
+              key={code}
               type="button"
               onClick={() => scrollToSearch(name)}
               className="flex items-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-[0.88rem] font-medium text-gray-700 shadow-sm transition-all hover:border-blue-400 hover:bg-blue-50 hover:text-blue-700 hover:shadow-md focus-visible:outline-2 focus-visible:outline-blue-600"
             >
-              <span className="text-[1.15rem] leading-none">{flag}</span>
+              <img
+                src={`https://flagcdn.com/24x18/${code}.png`}
+                srcSet={`https://flagcdn.com/48x36/${code}.png 2x`}
+                width="24"
+                height="18"
+                alt={name}
+                className="rounded-[2px] object-cover shadow-sm"
+                onError={(e) => { e.target.style.display = 'none'; }}
+              />
               <span>{name}</span>
             </button>
           ))}
@@ -78,9 +86,7 @@ export default function Countries() {
         )}
 
         {filtered.length === 0 && (
-          <div className="py-16 text-center text-gray-400">
-            No countries found for this region yet.
-          </div>
+          <p className="py-16 text-center text-gray-400">No countries in this region yet.</p>
         )}
       </div>
     </section>
